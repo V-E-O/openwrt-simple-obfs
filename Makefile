@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017 Jian Chang <aa65535@live.com>
+# Copyright (C) 2017 Jian Chang <aa65535@live.com> & V.E.O
 #
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
@@ -12,21 +12,21 @@ PKG_VERSION:=0.0.3
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/shadowsocks/simple-obfs.git
+PKG_SOURCE_URL:=https://github.com/V-E-O/simple-obfs.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)
-PKG_SOURCE_VERSION:=1f5dcace9ee50da6144824b9db9e89be889a9033
+PKG_SOURCE_VERSION:=HEAD
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_LICENSE:=GPLv3
 PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:=Jian Chang <aa65535@live.com>
+PKG_MAINTAINER:=Jian Chang <aa65535@live.com> & V.E.O
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(PKG_SOURCE_SUBDIR)
 
 PKG_INSTALL:=1
 PKG_FIXUP:=autoreconf
 PKG_USE_MIPS16:=0
-PKG_BUILD_PARALLEL:=1
+PKG_BUILD_PARALLEL:=4
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -34,8 +34,8 @@ define Package/simple-obfs/Default
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=Simple-obfs
-	URL:=https://github.com/shadowsocks/simple-obfs
-	DEPENDS:=+libev +libudns +libpthread +libsodium
+	URL:=https://github.com/V-E-O/simple-obfs
+	DEPENDS:=+libpthread
 endef
 
 Package/simple-obfs = $(call Package/simple-obfs/Default)
@@ -47,6 +47,8 @@ endef
 
 Package/simple-obfs-server/description = $(Package/simple-obfs/description)
 
+CFLAGS += -Os -fdata-sections -ffunction-sections -Wl,--gc-sections -fvisibility=hidden
+LDFLAGS += -fdata-sections -ffunction-sections -Wl,--gc-sections -fvisibility=hidden
 CONFIGURE_ARGS += --disable-ssp --disable-documentation --disable-assert
 
 define Package/simple-obfs/install
