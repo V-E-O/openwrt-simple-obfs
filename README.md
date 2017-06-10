@@ -13,7 +13,7 @@ Simple-obfs for OpenWrt
    # 获取 simple-obfs Makefile
    git clone https://github.com/V-E-O/openwrt-simple-obfs.git package/simple-obfs
    # 开始编译
-   make package/simple-obfs/compile V=99
+   make package/simple-obfs/compile V=s
    ```
 
 
