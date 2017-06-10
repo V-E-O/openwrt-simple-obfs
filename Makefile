@@ -49,7 +49,7 @@ Package/simple-obfs-server/description = $(Package/simple-obfs/description)
 
 CFLAGS += -Os -fdata-sections -ffunction-sections -Wl,--gc-sections -fvisibility=hidden
 LDFLAGS += -fdata-sections -ffunction-sections -Wl,--gc-sections -fvisibility=hidden
-CONFIGURE_ARGS += --disable-ssp --disable-documentation --disable-assert
+CONFIGURE_ARGS += --disable-ssp --disable-documentation --disable-assert --enable-shared=no
 
 define Package/simple-obfs/install
 	$(INSTALL_DIR) $(1)/usr/bin
